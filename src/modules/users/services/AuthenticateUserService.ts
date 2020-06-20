@@ -41,7 +41,7 @@ class AuthenticateUserService {
       throw new AppError("Combinations email/password does'nt match", 401);
     }
 
-    const passwordMatched = this.hashProvider.compareHash(
+    const passwordMatched = await this.hashProvider.compareHash(
       password,
       user.password,
     );
