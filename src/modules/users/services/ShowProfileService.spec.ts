@@ -20,6 +20,6 @@ describe('UpdateProfile', () => {
     const profile = await showProfile.execute({ user_id: user.id });
 
     expect(profile.name).toBe('Zezinho da meia noite');
-    expect(profile.email).toBe('jmidnightze@example.com');
+    expect(profile.email).toBe('midnightze@example.com');
   }); // teste 1
 });
