@@ -7,7 +7,7 @@ import { errors } from 'celebrate';
 import 'reflect-metadata';
 import uploadConfig from '@config/upload';
 import routes from '@shared/infra/http/routes';
-
+import rateLimiter from '@shared/infra/http/middlewares/rateLimiter';
 import AppError from '@shared/errors/AppError';
 
 import '@shared/infra/typeorm';
@@ -15,6 +15,7 @@ import '@shared/container';
 
 const app = express();
 
+app.use(rateLimiter);
 app.use(cors());
 app.use(express.json());
 app.use('/files', express.static(uploadConfig.uploadsFolder));
@@ -29,8 +30,6 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
       message: err.message,
     });
   }
-
-  console.error(err);
 
   return response.status(500).json({
     status: 'error',
